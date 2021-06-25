@@ -1,23 +1,7 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import fetchGitHubProfile from "./utils/fetchGitHubProfile";
 
-const testData = [
-  {
-    "name": "Rhian",
-    "company": "Codeminer42",
-    "avatar_url": "https://avatars.githubusercontent.com/u/72531802?v=4"
-  },
-  {
-    "name": "Angelica dos Santos",
-    "company": "PUC Minas - Poços de Caldas",
-    "avatar_url": "https://avatars.githubusercontent.com/u/65343425?v=4"
-  },
-  {
-    "name": "Andre Paiva",
-    "company": "Freelancer",
-    "avatar_url": "https://avatars.githubusercontent.com/u/61209835?v=4"
-  }
-];
+const initialUserNames = ["rhian-cs", "angelcomp", "afpaiva"];
 
 const CardList = (props) => {
   return (
@@ -29,37 +13,33 @@ const CardList = (props) => {
 
 const Card = ({avatar_url, name, company}) => {
   return (
-    <div className="github-profile" style={{ margin: '1rem' }}>
+    <div className="github-profile">
       <img
         src={avatar_url}
         alt={name}
       />
       <div className="info">
         <div className="name">{name}</div>
-        <div className="company">{company || <small class="gray-text">(No company)</small>}</div>
+        <div className="company">{company || <small className="gray-text">(No company)</small>}</div>
       </div>
     </div>
   );
 }
 
 const Form = ({onSubmit}) => {
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.get(`https://api.github.com/users/${userName}`);
+    const fetchResponse = await fetchGitHubProfile(userName);
 
-      onSubmit(response.data);
-      setUserName('');
-    } catch(error) {
-      if(error.response && error.response.status === 404) {
-        return alert("This user could not be found.");
-      }
-
-      alert("There was an error fetching this username!");
+    if(!fetchResponse.success) {
+      return alert(fetchResponse.errorMessage);
     }
+
+    onSubmit(fetchResponse.data);
+    setUserName("");
   }
 
   return (
@@ -76,12 +56,38 @@ const Form = ({onSubmit}) => {
   );
 }
 
+const fetchInitialUserNames = (initialUserNames, addNewProfile) => {
+  initialUserNames.map(async userName => {
+    const fetchResponse = await fetchGitHubProfile(userName);
+
+    if(!fetchResponse.success) { return; }
+
+    addNewProfile(fetchResponse.data)
+  });
+}
+
 const App = () => {
-  const [profiles, setProfiles] = useState(testData)
+  const [profiles, setProfiles] = useState([]);
+
+  const getProfilesIds = (profilesList) => profilesList.map((profile) => profile.id);
+
+  const profilesWithNewProfile = (previousProfiles, newProfileData) => {
+    if(getProfilesIds(previousProfiles).includes(newProfileData.id)) {
+      alert("This user is already in the list!");
+      return previousProfiles;
+    }
+    return [...previousProfiles, newProfileData];
+  }
 
   const addNewProfile = (newProfileData) => {
-    setProfiles(previousProfiles => [...previousProfiles, newProfileData]);
+    setProfiles(previousProfiles => profilesWithNewProfile(previousProfiles, newProfileData));
   };
+
+  useEffect(() => {
+    if(!profiles.length) {
+      fetchInitialUserNames(initialUserNames, addNewProfile);
+    }
+  });
 
   return(
     <div>
