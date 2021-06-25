@@ -1,60 +1,11 @@
 import { useEffect, useState } from "react";
+
 import fetchGitHubProfile from "./utils/fetchGitHubProfile";
 
+import CardList from "./components/CardList"
+import Form from "./components/Form"
+
 const initialUserNames = ["rhian-cs", "angelcomp", "afpaiva"];
-
-const CardList = (props) => {
-  return (
-    <div>
-      {props.profiles.map(profile => <Card key={profile.id} {...profile} />)}
-    </div>
-  );
-}
-
-const Card = ({avatar_url, name, company}) => {
-  return (
-    <div className="github-profile">
-      <img
-        src={avatar_url}
-        alt={name}
-      />
-      <div className="info">
-        <div className="name">{name}</div>
-        <div className="company">{company || <small className="gray-text">(No company)</small>}</div>
-      </div>
-    </div>
-  );
-}
-
-const Form = ({onSubmit}) => {
-  const [userName, setUserName] = useState("");
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    const fetchResponse = await fetchGitHubProfile(userName);
-
-    if(!fetchResponse.success) {
-      return alert(fetchResponse.errorMessage);
-    }
-
-    onSubmit(fetchResponse.data);
-    setUserName("");
-  }
-
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="text"
-        value={userName}
-        onChange={event => setUserName(event.target.value)}
-        placeholder="GitHub username"
-        required
-      />
-      <button>Add card</button>
-    </form>
-  );
-}
 
 const fetchInitialUserNames = (initialUserNames, addNewProfile) => {
   initialUserNames.map(async userName => {
