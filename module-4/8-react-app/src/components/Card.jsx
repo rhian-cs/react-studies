@@ -1,4 +1,4 @@
-const Card = ({avatar_url, name, company}) => {
+const Card = ({ avatar_url, name, company }) => {
   return (
     <div className="github-profile">
       <img

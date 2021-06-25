@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import fetchGitHubProfile from "../utils/fetchGitHubProfile";
 
-const Form = ({onSubmit}) => {
+const Form = ({ onSubmit }) => {
   const [userName, setUserName] = useState("");
 
   const handleFormSubmit = async (event) => {

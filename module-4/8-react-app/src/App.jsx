@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import fetchGitHubProfile from "./utils/fetchGitHubProfile";
+import { profilesWithNewProfile } from "./utils/profiles";
 
 import CardList from "./components/CardList"
 import Form from "./components/Form"
@@ -19,16 +20,6 @@ const fetchInitialUserNames = (initialUserNames, addNewProfile) => {
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
-
-  const getProfilesIds = (profilesList) => profilesList.map((profile) => profile.id);
-
-  const profilesWithNewProfile = (previousProfiles, newProfileData) => {
-    if(getProfilesIds(previousProfiles).includes(newProfileData.id)) {
-      alert("This user is already in the list!");
-      return previousProfiles;
-    }
-    return [...previousProfiles, newProfileData];
-  }
 
   const addNewProfile = (newProfileData) => {
     setProfiles(previousProfiles => profilesWithNewProfile(previousProfiles, newProfileData));
