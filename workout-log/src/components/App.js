@@ -1,19 +1,16 @@
 import * as React from 'react';
 
+import ItemsTable from './ItemsTable';
+import InsertItemForm from './InsertItemForm';
+
 export function App({ initialData }) {
-  const [count, setCount] = React.useState(0);
   return (
-    <div>
-      <h1>{initialData.appName}</h1>
-      This is a sample stateful and server-side rendered React application.
-      <br />
-      <br />
-      Here is a button that will track how many times you click it:
-      <br />
-      <br />
-      <button title="increment" onClick={() => setCount(count + 1)}>
-        {count}
-      </button>
+    <div className="container">
+      <h1 className="centered-heading">{initialData.appName}</h1>
+      <InsertItemForm />
+      <hr />
+      <ItemsTable />
+      <h1 className="centered-heading">10 hours of exercises</h1>
     </div>
   );
 }

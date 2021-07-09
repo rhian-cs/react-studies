@@ -11,9 +11,51 @@
 
 body {
   color: var(--color-main);
-  max-width: 960px;
-  margin: auto;
-  padding: 0.25rem 3rem;
 
   font-size: 1.6em;
+}
+
+.container {
+  max-width: 640px;
+  margin: auto;
+  padding: 0.25rem 3rem;
+}
+
+.centered-heading {
+  text-align: center;
+}
+
+.insert-item-form {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  gap: 0.25em;
+}
+
+.insert-item-form > * {
+  flex: 1;
+  flex-basis: 12rem;
+}
+
+.items-table {
+  width: 100%;
+}
+
+.items-table table,
+.items-table td,
+.items-table th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.items-table th {
+  text-align: left;
+}
+
+.items-table td:not(:last-child) {
+  width: 33.3%;
+}
+
+.items-table td:last-child {
+  white-space: nowrap;
 }
