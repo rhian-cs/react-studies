@@ -1,5 +1,6 @@
 :root {
   --color-main: #333;
+  font-size: 62.5%;
 }
 
 *,
@@ -10,4 +11,9 @@
 
 body {
   color: var(--color-main);
+  max-width: 960px;
+  margin: auto;
+  padding: 0.25rem 3rem;
+
+  font-size: 1.6em;
 }
