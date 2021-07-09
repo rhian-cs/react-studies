@@ -1,6 +1,8 @@
 import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { validWorkout } from '../validators/workoutValidator';
+
 const workoutReducer = (state, event) => {
   return {
     ...state,
@@ -16,23 +18,30 @@ const generateEmptyWorkout = () => ({
 });
 
 const WorkoutForm = ({ onSubmit }) => {
-  const [item, setItem] = useReducer(workoutReducer, generateEmptyWorkout());
+  const [workout, setWorkout] = useReducer(
+    workoutReducer,
+    generateEmptyWorkout(),
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(item);
-    setItem({ name: 'uuid', value: uuidv4() });
+    if (!validWorkout(workout)) {
+      return;
+    }
+
+    onSubmit(workout);
+    setWorkout({ name: 'uuid', value: uuidv4() });
   };
 
   const handleChange = (event) => {
-    setItem({
+    setWorkout({
       name: event.target.name,
       value: event.target.value,
     });
   };
 
   return (
-    <form onSubmit={handleSubmit} target="#" className="insert-item-form">
+    <form onSubmit={handleSubmit} target="#" className="insert-workout-form">
       <input type="number" name="hours" onChange={handleChange} />
       <select name="type" onChange={handleChange}>
         <option value="" selected="selected">
