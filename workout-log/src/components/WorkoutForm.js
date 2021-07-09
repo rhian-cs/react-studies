@@ -35,6 +35,9 @@ const WorkoutForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} target="#" className="insert-item-form">
       <input type="number" name="hours" onChange={handleChange} />
       <select name="type" onChange={handleChange}>
+        <option value="" selected="selected">
+          Please select...
+        </option>
         <option value="running">Running</option>
         <option value="swimming">Swimming</option>
         <option value="bicycle">Bicycle</option>
