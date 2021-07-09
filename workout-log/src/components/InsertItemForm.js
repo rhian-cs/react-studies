@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const itemReducer = (itemState, event) => {
   return {
@@ -8,7 +9,7 @@ const itemReducer = (itemState, event) => {
 };
 
 const InsertItemForm = ({ onSubmit }) => {
-  const [item, setItem] = useReducer(itemReducer, {});
+  const [item, setItem] = useReducer(itemReducer, { uuid: uuidv4() });
 
   const handleSubmit = (e) => {
     e.preventDefault();
