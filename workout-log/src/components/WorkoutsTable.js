@@ -1,7 +1,7 @@
 import React from 'react';
 import WorkoutTableItem from './WorkoutTableItem';
 
-const WorkoutsTable = ({ workouts }) => (
+const WorkoutsTable = ({ workouts, onDestroy }) => (
   <table className="items-table">
     <thead>
       <tr>
@@ -13,7 +13,13 @@ const WorkoutsTable = ({ workouts }) => (
     </thead>
     <tbody>
       {workouts.map((workout) => {
-        return <WorkoutTableItem key={workout.uuid} {...workout} />;
+        return (
+          <WorkoutTableItem
+            key={workout.uuid}
+            {...workout}
+            onDestroy={onDestroy}
+          />
+        );
       })}
     </tbody>
   </table>
