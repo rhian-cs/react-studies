@@ -1,19 +1,27 @@
 import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const itemReducer = (itemState, event) => {
+const workoutReducer = (state, event) => {
   return {
-    ...itemState,
+    ...state,
     [event.name]: event.value,
   };
 };
 
-const InsertItemForm = ({ onSubmit }) => {
-  const [item, setItem] = useReducer(itemReducer, { uuid: uuidv4() });
+const generateEmptyWorkout = () => ({
+  uuid: uuidv4(),
+  hours: 0,
+  type: '',
+  date: '',
+});
+
+const WorkoutForm = ({ onSubmit }) => {
+  const [item, setItem] = useReducer(workoutReducer, generateEmptyWorkout());
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(item);
+    setItem({ name: 'uuid', value: uuidv4() });
   };
 
   const handleChange = (event) => {
@@ -37,4 +45,4 @@ const InsertItemForm = ({ onSubmit }) => {
   );
 };
 
-export default InsertItemForm;
+export default WorkoutForm;
