@@ -41,18 +41,21 @@ const WorkoutForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} target="#" className="insert-workout-form">
-      <input type="number" name="hours" onChange={handleChange} />
-      <select name="type" onChange={handleChange}>
-        <option value="" selected="selected">
-          Please select...
-        </option>
-        <option value="running">Running</option>
-        <option value="swimming">Swimming</option>
-        <option value="bicycle">Bicycle</option>
-      </select>
-      <input type="date" name="date" onChange={handleChange} />
-      <input type="submit" value="Add" />
+    <form onSubmit={handleSubmit} target="#">
+      <fieldset className="insert-workout-fieldset">
+        <legend>Insert an item</legend>
+        <input type="number" name="hours" onChange={handleChange} />
+        <select name="type" onChange={handleChange}>
+          <option value="" selected="selected">
+            Please select...
+          </option>
+          <option value="running">Running</option>
+          <option value="swimming">Swimming</option>
+          <option value="bicycle">Bicycle</option>
+        </select>
+        <input type="date" name="date" onChange={handleChange} />
+        <input type="submit" value="Add" />
+      </fieldset>
     </form>
   );
 };

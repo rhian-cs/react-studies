@@ -30,7 +30,7 @@ export function App({ initialData }) {
     <div className="container">
       <h1 className="centered-heading">{initialData.appName}</h1>
       <WorkoutForm onSubmit={addWorkout} />
-      <hr />
+      <hr className="divider" />
       <WorkoutsTable workouts={workouts} onDestroy={removeWorkout} />
       <h1 className="centered-heading">
         {totalWorkoutHours()} hours of exercises
