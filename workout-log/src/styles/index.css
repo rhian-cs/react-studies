@@ -24,7 +24,7 @@ body {
 .container {
   max-width: 640px;
   margin: auto;
-  padding: 0.25rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .centered-heading {
@@ -49,15 +49,26 @@ body {
   width: 100%;
 }
 
-.items-table table,
-.items-table td,
-.items-table th {
-  border: 1px solid black;
+table.items-table {
   border-collapse: collapse;
+  border-spacing: 0;
+
+  border: 1px solid black;
 }
 
-.items-table th {
+.items-table thead > tr {
+  background-color: #c0c0c0;
+
   text-align: left;
+}
+
+.items-table th,
+td {
+  padding: 0.25rem 0.5rem 0.75rem 0.5rem;
+}
+
+.items-table tbody > tr:nth-child(odd) {
+  background-color: #e7ecee;
 }
 
 .items-table td:not(:last-child) {
