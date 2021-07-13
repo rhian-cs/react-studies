@@ -46,11 +46,9 @@ const WorkoutForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} target="#">
       <fieldset className="insert-workout-fieldset">
         <legend>Insert an item</legend>
-        <input type="number" name="hours" onChange={handleChange} />
-        <select name="type" onChange={handleChange}>
-          <option value="" selected="selected">
-            Please select...
-          </option>
+        <input type="number" min="1" name="hours" onChange={handleChange} />
+        <select name="type" onChange={handleChange} defaultValue="">
+          <option value="">Please select...</option>
           {workoutTypes.map((workoutType, index) => (
             <option key={index} value={workoutType}>
               {capitalize(workoutType)}
