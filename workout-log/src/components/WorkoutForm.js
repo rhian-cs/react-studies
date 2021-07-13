@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import workoutTypes from '../utils/workoutTypes';
 import { capitalize } from '../utils/stringUtils';
-import { validWorkout } from '../validators/workoutValidator';
+import { validateWorkout } from '../validators/workoutValidator';
 
 const workoutReducer = (state, event) => {
   return {
@@ -14,10 +14,16 @@ const workoutReducer = (state, event) => {
 
 const generateEmptyWorkout = () => ({
   uuid: uuidv4(),
-  hours: 0,
+  hours: 1,
   type: '',
   date: '',
 });
+
+const alertValidationErrors = (errors) => {
+  const errorMessages = errors.map((message) => `• ${message}\n`).join('');
+
+  alert('Please fix the following errors:\n' + errorMessages);
+};
 
 const WorkoutForm = ({ onSubmit }) => {
   const [workout, setWorkout] = useReducer(
@@ -27,7 +33,11 @@ const WorkoutForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validWorkout(workout)) {
+
+    const workoutValidation = validateWorkout(workout);
+
+    if (!workoutValidation.valid) {
+      alertValidationErrors(workoutValidation.validationErrors);
       return;
     }
 
@@ -46,8 +56,14 @@ const WorkoutForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} target="#">
       <fieldset className="insert-workout-fieldset">
         <legend>Insert an item</legend>
-        <input type="number" min="1" name="hours" onChange={handleChange} />
-        <select name="type" onChange={handleChange} defaultValue="">
+        <input
+          type="number"
+          min="1"
+          name="hours"
+          value={workout.hours}
+          onChange={handleChange}
+        />
+        <select name="type" onChange={handleChange} value={workout.type}>
           <option value="">Please select...</option>
           {workoutTypes.map((workoutType, index) => (
             <option key={index} value={workoutType}>
@@ -55,7 +71,12 @@ const WorkoutForm = ({ onSubmit }) => {
             </option>
           ))}
         </select>
-        <input type="date" name="date" onChange={handleChange} />
+        <input
+          type="date"
+          name="date"
+          value={workout.date}
+          onChange={handleChange}
+        />
         <input type="submit" value="Add" />
       </fieldset>
     </form>

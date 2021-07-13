@@ -1,27 +1,47 @@
 import workoutTypes from '../utils/workoutTypes';
 
-const validHours = (value) => {
+const validateHours = (value) => {
+  if (value == 0) {
+    return 'The workout hours cannot be zero.';
+  }
+
   // Check for simple integer value only by the digits (e.g. no 2e4 allowed)
   const re = new RegExp(/^\d*$/g);
 
-  return re.test(value + '');
+  return re.test(value + '')
+    ? ''
+    : 'The workout hours must be a positive number.';
 };
 
-const validType = (type) => workoutTypes.includes(type);
+const validateType = (type) => {
+  if (type === '') {
+    return 'Please select a workout type.';
+  }
 
-const validDate = (date) => {
+  return workoutTypes.includes(type)
+    ? ''
+    : 'The selected workout type is not valid.';
+};
+
+const validateDate = (date) => {
   // Simple regex for yyyy-mm-dd
   const re = new RegExp(/^(\d){4}-(\d){2}-(\d){2}$/g);
 
-  return re.test(date);
+  return re.test(date) ? '' : 'Please insert a valid date.';
 };
 
-const validWorkout = (workout) => {
-  return (
-    validHours(workout.hours) &&
-    validType(workout.type) &&
-    validDate(workout.date)
-  );
+const validateWorkout = (workout) => {
+  let validationErrors = [
+    validateHours(workout.hours),
+    validateType(workout.type),
+    validateDate(workout.date),
+  ];
+
+  validationErrors = validationErrors.filter((msg) => msg);
+
+  const valid = !validationErrors.length;
+
+  return { valid, validationErrors };
 };
 
-export { validWorkout };
+export { validateWorkout };
