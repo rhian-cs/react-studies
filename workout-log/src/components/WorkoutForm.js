@@ -1,6 +1,8 @@
 import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import workoutTypes from '../utils/workoutTypes';
+import { capitalize } from '../utils/stringUtils';
 import { validWorkout } from '../validators/workoutValidator';
 
 const workoutReducer = (state, event) => {
@@ -49,9 +51,11 @@ const WorkoutForm = ({ onSubmit }) => {
           <option value="" selected="selected">
             Please select...
           </option>
-          <option value="running">Running</option>
-          <option value="swimming">Swimming</option>
-          <option value="bicycle">Bicycle</option>
+          {workoutTypes.map((workoutType, index) => (
+            <option key={index} value={workoutType}>
+              {capitalize(workoutType)}
+            </option>
+          ))}
         </select>
         <input type="date" name="date" onChange={handleChange} />
         <input type="submit" value="Add" />

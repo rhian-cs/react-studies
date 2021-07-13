@@ -1,3 +1,5 @@
+import workoutTypes from '../utils/workoutTypes';
+
 const validHours = (value) => {
   // Check for simple integer value only by the digits (e.g. no 2e4 allowed)
   const re = new RegExp(/^\d*$/g);
@@ -5,7 +7,7 @@ const validHours = (value) => {
   return re.test(value + '');
 };
 
-const validType = (type) => ['running', 'bycicle', 'swimming'].includes(type);
+const validType = (type) => workoutTypes.includes(type);
 
 const validDate = (date) => {
   // Simple regex for yyyy-mm-dd
