@@ -8,9 +8,7 @@ const WorkoutTableItem = ({ uuid, hours, type, date, onDestroy }) => (
     <td>{capitalize(type)}</td>
     <td>{date}</td>
     <td>
-      <button className="delete-button" onClick={() => onDestroy(uuid)}>
-        &ndash;
-      </button>
+      <button className="delete" onClick={() => onDestroy(uuid)}></button>
     </td>
   </tr>
 );

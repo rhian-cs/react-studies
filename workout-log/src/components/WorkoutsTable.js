@@ -3,7 +3,7 @@ import WorkoutTableItem from './WorkoutTableItem';
 
 const WorkoutsTable = ({ workouts, onDestroy }) => (
   <div style={{ 'overflow-x': 'auto' }}>
-    <table className="items-table">
+    <table className="table is-bordered is-striped is-narrow is-hoverable">
       <thead>
         <tr>
           <th>Tempo</th>

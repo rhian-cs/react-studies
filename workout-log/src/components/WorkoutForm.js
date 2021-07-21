@@ -53,32 +53,44 @@ const WorkoutForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} target="#">
-      <fieldset className="insert-workout-fieldset">
-        <legend>Insert an item</legend>
-        <input
-          type="number"
-          min="1"
-          name="hours"
-          value={workout.hours}
-          onChange={handleChange}
-        />
-        <select name="type" onChange={handleChange} value={workout.type}>
-          <option value="">Please select...</option>
-          {workoutTypes.map((workoutType, index) => (
-            <option key={index} value={workoutType}>
-              {capitalize(workoutType)}
-            </option>
-          ))}
-        </select>
-        <input
-          type="date"
-          name="date"
-          value={workout.date}
-          onChange={handleChange}
-        />
-        <input type="submit" value="Add" />
-      </fieldset>
+    <form onSubmit={handleSubmit} target="#" className="box">
+      <h3>Insert an item</h3>
+      <div className="columns">
+        <div className="column">
+          <input
+            type="number"
+            min="1"
+            name="hours"
+            value={workout.hours}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+        <div className="column">
+          <div className="select">
+            <select name="type" onChange={handleChange} value={workout.type}>
+              <option value="">Please select...</option>
+              {workoutTypes.map((workoutType, index) => (
+                <option key={index} value={workoutType}>
+                  {capitalize(workoutType)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="column">
+          <input
+            type="date"
+            name="date"
+            value={workout.date}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+        <div className="column">
+          <input className="button is-primary" type="submit" value="Add" />
+        </div>
+      </div>
     </form>
   );
 };

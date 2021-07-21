@@ -27,14 +27,11 @@ export function App({ initialData }) {
   };
 
   return (
-    <div className="container">
-      <h1 className="centered-heading">{initialData.appName}</h1>
+    <div className="content has-text-centered">
+      <h1>{initialData.appName}</h1>
       <WorkoutForm onSubmit={addWorkout} />
-      <hr className="divider" />
       <WorkoutsTable workouts={workouts} onDestroy={removeWorkout} />
-      <h1 className="centered-heading">
-        {totalWorkoutHours()} hours of exercises
-      </h1>
+      <h1>{totalWorkoutHours()} hours of exercises</h1>
     </div>
   );
 }
