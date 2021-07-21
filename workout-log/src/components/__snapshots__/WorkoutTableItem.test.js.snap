@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorkoutTableItem matches snapshot 1`] = `
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          2
+          h
+        </td>
+        <td>
+          Bicycle
+        </td>
+        <td>
+          2019-02-03
+        </td>
+        <td>
+          <button
+            class="delete-button"
+          >
+            –
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

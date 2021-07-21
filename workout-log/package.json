@@ -15,6 +15,7 @@
     "prod:reload": "pm2 reload --update-env workout-logProd",
     "prod:logs": "pm2 logs --update-env workout-logProd",
     "test": "jest",
+    "test:watch": "yarn run test --watch",
     "verify-tests": "jest --coverage"
   },
   "jest": {
