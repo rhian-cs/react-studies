@@ -4,3 +4,4 @@ These are my personal tiny React projects from studying courses. Since they are 
 
 ## List of small projects in this repository:
 - GitHub Cards App
+- Workout Log
